@@ -122,3 +122,133 @@ map.setView([lat,lng],15);
 
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>AI dự đoán giao thông Việt Nam</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f2f2f2;
+}
+
+#top{
+background:white;
+padding:15px;
+text-align:center;
+box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+#map{
+height:500px;
+}
+
+#result{
+background:white;
+padding:20px;
+}
+
+input{
+padding:10px;
+width:250px;
+}
+
+button{
+padding:10px 20px;
+background:#3498db;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="top">
+
+<h2>AI dự đoán tắc đường Việt Nam</h2>
+
+<input id="khuvuc" placeholder="Nhập khu vực (Hà Nội, Đà Nẵng...)">
+
+<button onclick="duDoan()">Phân tích</button>
+
+</div>
+
+<div id="map"></div>
+
+<div id="result">
+
+<h3>Kết quả AI</h3>
+
+<p id="ketqua"></p>
+<p id="giaiphap"></p>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+var map = L.map('map').setView([16.0471,108.2068],6);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+attribution:'Map data © OpenStreetMap'
+}).addTo(map);
+
+var marker;
+
+function duDoan(){
+
+var kv=document.getElementById("khuvuc").value;
+
+var mucdo=Math.floor(Math.random()*3);
+
+var ketqua="";
+var giaiphap="";
+
+if(mucdo==0){
+ketqua="🚗 Giao thông thông thoáng";
+giaiphap="Cá nhân: đi lại bình thường. Cộng đồng: duy trì hệ thống đèn hiện tại.";
+}
+
+if(mucdo==1){
+ketqua="⚠️ Khu vực có dấu hiệu đông xe";
+giaiphap="Cá nhân: tránh giờ cao điểm. Cộng đồng: điều chỉnh đèn giao thông.";
+}
+
+if(mucdo==2){
+ketqua="🚨 Nguy cơ tắc đường cao";
+giaiphap="Cá nhân: dùng xe buýt hoặc đường vòng. Cộng đồng: phân luồng giao thông.";
+}
+
+document.getElementById("ketqua").innerHTML="Khu vực "+kv+" : "+ketqua;
+
+document.getElementById("giaiphap").innerHTML=giaiphap;
+
+var lat=16+(Math.random()*8);
+var lng=105+(Math.random()*5);
+
+if(marker){
+map.removeLayer(marker);
+}
+
+marker=L.marker([lat,lng]).addTo(map);
+
+map.setView([lat,lng],10);
+
+}
+
+</script>
+
+</body>
+</html>
