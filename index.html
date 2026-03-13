@@ -1,16 +1,85 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Trang web của tôi</title>
+<title>AI dự đoán giao thông</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f2f2f2;
+text-align:center;
+padding:40px;
+}
+
+.box{
+background:white;
+width:450px;
+margin:auto;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+input{
+padding:10px;
+width:80%;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+background:#3498db;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+</style>
+
+<script>
+
+function duDoan(){
+
+var duong=document.getElementById("duong").value;
+
+var ketqua=[
+"🚗 Đường thông thoáng",
+"⚠️ Đường bắt đầu đông",
+"🚨 Nguy cơ tắc đường cao"
+];
+
+var random=Math.floor(Math.random()*3);
+
+document.getElementById("ketqua").innerHTML=
+"Dự đoán tại "+duong+" : "+ketqua[random];
+
+}
+
+</script>
+
 </head>
 
 <body>
 
-<h1>Chào mừng đến website của tôi</h1>
+<div class="box">
 
-<p>Tôi đang xây dựng hệ thống AI dự đoán giao thông.</p>
+<h1>AI dự đoán giao thông</h1>
 
-<p>Website này được tạo miễn phí bằng GitHub Pages.</p>
+<p>Nhập tên con đường:</p>
+
+<input id="duong" placeholder="Ví dụ: Nguyễn Trãi">
+
+<br>
+
+<button onclick="duDoan()">Dự đoán</button>
+
+<h3 id="ketqua"></h3>
+
+</div>
 
 </body>
+
 </html>
