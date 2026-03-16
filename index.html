@@ -247,7 +247,28 @@ marker=L.marker([lat,lng]).addTo(map);
 map.setView([lat,lng],10);
 
 }
+var trafficLayer;
 
+function taoTacDuong(lat,lng){
+
+var area = [
+[lat+0.01,lng+0.01],
+[lat+0.01,lng-0.01],
+[lat-0.01,lng-0.01],
+[lat-0.01,lng+0.01]
+];
+
+if(trafficLayer){
+map.removeLayer(trafficLayer);
+}
+
+trafficLayer = L.polygon(area,{
+color:'red',
+fillColor:'red',
+fillOpacity:0.5
+}).addTo(map);
+
+}
 </script>
 
 </body>
